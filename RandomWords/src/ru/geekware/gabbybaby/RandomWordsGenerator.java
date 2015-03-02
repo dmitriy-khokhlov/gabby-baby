@@ -1,7 +1,7 @@
 package ru.geekware.gabbybaby;
 
+import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.List;
 import java.util.Random;
 
 /**
@@ -34,7 +34,8 @@ public class RandomWordsGenerator {
         }
 
         Random random = new Random();
-        List<String> source = Arrays.asList( _dictionary );
+        ArrayList<String> source =
+                new ArrayList<String>( Arrays.asList( _dictionary ) );
         String[] sequence = new String[ length ];
 
         for ( int index = 0; index < length; index++ ) {
