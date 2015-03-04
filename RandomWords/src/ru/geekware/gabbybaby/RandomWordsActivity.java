@@ -40,6 +40,6 @@ public class RandomWordsActivity extends Activity {
                         (TextView) findViewById( R.id.wordTextView ) );
         _showWordsTimer = new Timer();
         // todo: stop timer after all words shown
-        _showWordsTimer.schedule( _showWordsTask, 0, 1500 );
+        _showWordsTimer.schedule( _showWordsTask, 0, 2000 );
     }
 }

@@ -27,7 +27,7 @@ public class ShowWordsTask extends TimerTask {
             setViewerText( "" );
             try {
                 // todo: нужна ли пауза с белым экраном?
-                Thread.sleep( 300 );
+                Thread.sleep( 200 );
             } catch ( InterruptedException e ) {
             }
             setViewerText( _words[ _nextIndex ] );
