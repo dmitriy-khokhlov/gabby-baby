@@ -6,8 +6,6 @@ import java.util.TimerTask;
 
 /**
  * Задача показа слов по таймеру.
- *
- * @author Dmitry Khokhlov
  */
 public class ShowWordsTask extends TimerTask {
 

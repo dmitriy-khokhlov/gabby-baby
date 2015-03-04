@@ -2,10 +2,10 @@ package ru.geekware.gabbybaby;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.os.Handler;
 import android.widget.TextView;
 
-import java.util.Timer;
-
+// todo: правильно ли использовать Timer в данной ситуации?
 // todo: анимация смены слов
 // todo: разный цвет слогов
 // todo: динамический размер текста
@@ -17,14 +17,13 @@ import java.util.Timer;
 public class RandomWordsActivity extends Activity {
 
     private RandomWordsGenerator _wordGenerator;
-    private ShowWordsTask _showWordsTask;
-    private Timer _showWordsTimer;
+    private Handler _displayWordsHandler;
 
     @Override
     public void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
-        _wordGenerator = new RandomWordsGenerator(
-                new String[] { "МАМА", "ПАПА", "БАБА", "ДЕДА", "ВАНЯ", } );
+        _wordGenerator = new RandomWordsGenerator( Config.defaultWords );
+        _displayWordsHandler = new Handler();
         setContentView( R.layout.main );
     }
 
@@ -34,12 +33,25 @@ public class RandomWordsActivity extends Activity {
         startWordsDemonstration();
     }
 
+    private String[] GenerateWordsSequence() {
+        int sequenceLength = Config.defaultWords.length;
+        if ( sequenceLength > Config.maxWordsInSequence ) {
+            sequenceLength = Config.maxWordsInSequence;
+        }
+        return _wordGenerator.GenerateWordsSequence( sequenceLength );
+    }
+
     private void startWordsDemonstration() {
-        _showWordsTask =
-                new ShowWordsTask( _wordGenerator.GenerateWordSequence( 5 ),
+        ShowWordsTask _showWordsTask =
+                new ShowWordsTask( _wordGenerator.GenerateWordsSequence( 5 ),
                         (TextView) findViewById( R.id.wordTextView ) );
-        _showWordsTimer = new Timer();
-        // todo: stop timer after all words shown
-        _showWordsTimer.schedule( _showWordsTask, 0, 1500 );
+    }
+
+    private class DisplayWordRunnable implements Runnable {
+
+        @Override
+        public void run() {
+
+        }
     }
 }
