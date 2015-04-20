@@ -24,6 +24,8 @@ public class RandomWordsGenerator {
      * @throws java.lang.IllegalArgumentException если длина последовательности
      * меньше 1 или больше длины словаря
      */
+    // todo: сделать не "без повторений", а с "минимальными повторениями",
+    // чтобы можно было генерировать последовательности неограниченного размера.
     public String[] GenerateWordsSequence( int length ) {
 
         if ( length < 1 || length > _dictionary.length ) {
