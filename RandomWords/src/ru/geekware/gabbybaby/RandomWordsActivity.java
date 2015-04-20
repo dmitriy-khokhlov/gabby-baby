@@ -4,8 +4,8 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.widget.TextView;
 
-import java.util.Timer;
-
+// todo: вынести все в ресурсы и настройки
+// todo: старт показа по правильному событию
 // todo: анимация смены слов
 // todo: разный цвет слогов
 // todo: динамический размер текста
@@ -13,33 +13,32 @@ import java.util.Timer;
 // todo: логотип
 // todo: название с пробелом или без?
 // todo: Play Market?
-// todo: вынести все в ресурсы и настройки
 public class RandomWordsActivity extends Activity {
 
     private RandomWordsGenerator _wordGenerator;
-    private ShowWordsTask _showWordsTask;
-    private Timer _showWordsTimer;
+    private TextView _wordTextView;
+    private WordsDemonstrator _wordsDemonstrator;
 
     @Override
     public void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
-        _wordGenerator = new RandomWordsGenerator(
-                new String[] { "МАМА", "ПАПА", "БАБА", "ДЕДА", "ВАНЯ", } );
+        _wordGenerator = new RandomWordsGenerator( Config.defaultWords );
         setContentView( R.layout.main );
+        _wordsDemonstrator = new WordsDemonstrator( GenerateWordsSequence(),
+                (TextView) findViewById( R.id.wordTextView ) );
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        startWordsDemonstration();
+        _wordsDemonstrator.startDemonstration();
     }
 
-    private void startWordsDemonstration() {
-        _showWordsTask =
-                new ShowWordsTask( _wordGenerator.GenerateWordSequence( 5 ),
-                        (TextView) findViewById( R.id.wordTextView ) );
-        _showWordsTimer = new Timer();
-        // todo: stop timer after all words shown
-        _showWordsTimer.schedule( _showWordsTask, 0, 2000 );
+    private String[] GenerateWordsSequence() {
+        int length = Config.defaultWords.length;
+        if ( length > Config.maxWordsSequenceLength ) {
+            length = Config.maxWordsSequenceLength;
+        }
+        return _wordGenerator.GenerateWordsSequence( length );
     }
 }

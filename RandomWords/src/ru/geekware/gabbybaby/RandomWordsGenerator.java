@@ -6,8 +6,6 @@ import java.util.Random;
 
 /**
  * Генератор случайной последовательности слов.
- *
- * @author Dmitry Khokhlov
  */
 public class RandomWordsGenerator {
 
@@ -26,7 +24,9 @@ public class RandomWordsGenerator {
      * @throws java.lang.IllegalArgumentException если длина последовательности
      * меньше 1 или больше длины словаря
      */
-    public String[] GenerateWordSequence( int length ) {
+    // todo: сделать не "без повторений", а с "минимальными повторениями",
+    // чтобы можно было генерировать последовательности неограниченного размера.
+    public String[] GenerateWordsSequence( int length ) {
 
         if ( length < 1 || length > _dictionary.length ) {
             throw new IllegalArgumentException(
