@@ -5,7 +5,8 @@
               android:background="#ffffffff"
               android:keepScreenOn="true"
               android:id="@+id/mainLayout"
-              android:gravity="center">
+              android:gravity="center"
+    >
 
     <TextView
         android:layout_width="wrap_content"
@@ -15,4 +16,5 @@
         android:textSize="350sp"
         android:typeface="sans"
         />
+
 </LinearLayout>

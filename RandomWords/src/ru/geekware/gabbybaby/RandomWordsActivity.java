@@ -26,7 +26,6 @@ public class RandomWordsActivity extends Activity {
 
         super.onCreate( savedInstanceState );
 
-        Settings.initialize( this );
         setContentView( R.layout.main );
 
         _wordGenerator = new RandomWordsGenerator( Settings.defaultWords );

@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-
-    <string name="app_name">GabbyBaby</string>
-
-    <string name="wordDisplayTimeMillisTitle">Время отображения слова (мс)</string>
-    <string name="pauseBetweenWordsMillis">Пауза между словами (мс)</string>
-
+    <string name="applicationName">GabbyBaby</string>
+    <string name="settingsActivityLabel">Настройки</string>
+    <string name="preferenceTitle_wordDisplayTimeMillis">Время отображения слова (мс)</string>
+    <string name="preferenceTitle_pauseBetweenWordsMillis">Пауза между словами (мс)</string>
 </resources>
