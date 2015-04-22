@@ -14,6 +14,7 @@ import android.widget.TextView;
 // todo: логотип
 // todo: название с пробелом или без?
 // todo: Play Market?
+// todo: интернационализация?
 public class RandomWordsActivity extends Activity {
 
     private RandomWordsGenerator _wordGenerator;
@@ -22,9 +23,13 @@ public class RandomWordsActivity extends Activity {
 
     @Override
     public void onCreate( Bundle savedInstanceState ) {
+
         super.onCreate( savedInstanceState );
-        _wordGenerator = new RandomWordsGenerator( Config.defaultWords );
+
+        Settings.initialize( this );
         setContentView( R.layout.main );
+
+        _wordGenerator = new RandomWordsGenerator( Settings.defaultWords );
         _wordsDemonstrator = new WordsDemonstrator( GenerateWordsSequence(),
                 (TextView) findViewById( R.id.wordTextView ) );
     }
@@ -36,9 +41,9 @@ public class RandomWordsActivity extends Activity {
     }
 
     private String[] GenerateWordsSequence() {
-        int length = Config.defaultWords.length;
-        if ( length > Config.maxWordsSequenceLength ) {
-            length = Config.maxWordsSequenceLength;
+        int length = Settings.defaultWords.length;
+        if ( length > Settings.maxWordsSequenceLength ) {
+            length = Settings.maxWordsSequenceLength;
         }
         return _wordGenerator.GenerateWordsSequence( length );
     }

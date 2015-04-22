@@ -36,7 +36,7 @@ public class WordsDemonstrator {
                 _textView.setText( _words[ _nextIndex ] );
                 _nextIndex++;
                 _handler.postDelayed( _clearWordRunnable,
-                        Config.wordDisplayTimeMillis );
+                        Settings.wordDisplayTimeMillis );
             }
         }
     }
@@ -48,7 +48,7 @@ public class WordsDemonstrator {
             _textView.setText( "" );
             if ( _nextIndex < _words.length ) {
                 _handler.postDelayed( _displayWordRunnable,
-                        Config.pauseBetweenWordsMillis );
+                        Settings.pauseBetweenWordsMillis );
             }
         }
     }

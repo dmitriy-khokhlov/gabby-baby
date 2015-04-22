@@ -1,4 +1,9 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">GabbyBaby</string>
+
+    <string name="wordDisplayTimeMillisTitle">Время отображения слова (мс)</string>
+    <string name="pauseBetweenWordsMillis">Пауза между словами (мс)</string>
+
 </resources>
