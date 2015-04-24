@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
     <EditTextPreference
-        android:key="wordDisplayTimeMillis"
+        android:key="@string/preferenceKey_wordDisplayTimeMillis"
         android:title="@string/preferenceTitle_wordDisplayTimeMillis"
         android:numeric="integer"
-        android:inputType="numberDecimal"
-        android:defaultValue="1500"
+        android:defaultValue="@integer/preferenceDefault_wordDisplayTimeMillis"
         />
     <EditTextPreference
-        android:key="pauseBetweenWordsMillis"
+        android:key="@string/preferenceKey_pauseBetweenWordsMillis"
         android:title="@string/preferenceTitle_pauseBetweenWordsMillis"
-        android:defaultValue="300"
+        android:numeric="integer"
+        android:defaultValue="@integer/preferenceDefault_pauseBetweenWordsMillis"
         />
 </PreferenceScreen>

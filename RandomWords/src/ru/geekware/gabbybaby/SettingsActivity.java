@@ -22,17 +22,25 @@ public class SettingsActivity extends Activity
                 R.integer.preferenceDefault_pauseBetweenWordsMillis );
     }
 
+    private String getStringPreference( int preferenceKeyResourceId ) {
+        return PreferenceManager.getDefaultSharedPreferences( this )
+                .getString( getResources().getString( preferenceKeyResourceId ),
+                        null );
+    }
+
     private void refreshSettings() {
         SharedPreferences preferences =
                 PreferenceManager.getDefaultSharedPreferences( this );
         try {
-            Settings.wordDisplayTimeMillis = Integer.parseInt( preferences
-                    .getString( WORD_DISPLAY_TIME_MILLIS_KEY, null ) );
+            Settings.wordDisplayTimeMillis = Integer.parseInt(
+                    getStringPreference(
+                            R.string.preferenceKey_wordDisplayTimeMillis ) );
         } catch ( NumberFormatException exception ) {
         }
         try {
-            Settings.pauseBetweenWordsMillis = Integer.parseInt( preferences
-                    .getString( PAUSE_BETWEEN_WORDS_MILLIS_KEY, null ) );
+            Settings.pauseBetweenWordsMillis = Integer.parseInt(
+                    getStringPreference(
+                            R.string.preferenceKey_pauseBetweenWordsMillis ) );
         } catch ( NumberFormatException exception ) {
         }
     }

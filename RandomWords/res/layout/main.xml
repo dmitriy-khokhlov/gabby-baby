@@ -1,18 +1,32 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-              android:background="#ffffffff"
-              android:keepScreenOn="true"
-              android:id="@+id/mainLayout"
-              android:gravity="center"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    android:background="#ffffffff"
+    android:keepScreenOn="true"
+    android:id="@+id/mainLayout"
+    android:gravity="center"
+    android:orientation="vertical"
+    android:longClickable="true"
+    android:animationCache="false"
     >
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/settingsButton"
+        android:src="@android:drawable/ic_menu_preferences"
+        android:layout_gravity="right"
+        android:alpha="0.3"
+        android:background="#00ffffff"
+        android:onClick="onSettingsButtonClick"
+        />
 
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/wordTextView"
-        android:textColor="#ff030061"
+        android:textColor="#fd004f23"
         android:textSize="350sp"
         android:typeface="sans"
         />
