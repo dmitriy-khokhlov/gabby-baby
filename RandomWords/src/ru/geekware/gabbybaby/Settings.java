@@ -1,24 +1,31 @@
 package ru.geekware.gabbybaby;
 
-import android.content.Context;
+import android.content.res.Resources;
 
 public final class Settings {
 
-    public static String[] defaultWords =
-        new String[] { "МАМА", "ПАПА", "БАБА", "ДЕДА", "ВАНЯ" };
     public static int wordDisplayTimeMillis;
     public static int pauseBetweenWordsMillis;
     public static int wordsSequenceLength;
+    public static String[] dictionary;
 
     private Settings() {
     }
 
-    public static void loadDefaults( Context context ) {
-        wordDisplayTimeMillis = context.getResources()
+    public static void loadDefaults( Resources resources ) {
+        wordDisplayTimeMillis = resources
             .getInteger( R.integer.preferenceDefault_wordDisplayTimeMillis );
-        pauseBetweenWordsMillis = context.getResources()
+        pauseBetweenWordsMillis = resources
             .getInteger( R.integer.preferenceDefault_pauseBetweenWordsMillis );
-        wordsSequenceLength = context.getResources()
+        wordsSequenceLength = resources
             .getInteger( R.integer.preferenceDefault_wordsSequenceLength );
+        setDictionaryFromString(
+            resources.getString( R.string.preferenceDefault_dictionary ) );
+    }
+
+    public static void setDictionaryFromString( String rawDictionary ) {
+        if ( rawDictionary != null ) {
+            dictionary = rawDictionary.split( "[,\\s]+" );
+        }
     }
 }

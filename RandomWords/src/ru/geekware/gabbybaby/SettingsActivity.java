@@ -43,6 +43,8 @@ public class SettingsActivity extends Activity
             // Обработка исключения не нужна, т.к. значение поля в Settings не
             // изменится - это и есть желаемое поведение.
         }
+        Settings.setDictionaryFromString(
+            getStringPreference( R.string.preferenceKey_dictionary ) );
     }
 
     @Override

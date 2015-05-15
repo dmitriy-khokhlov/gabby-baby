@@ -18,4 +18,9 @@
         android:numeric="integer"
         android:defaultValue="@integer/preferenceDefault_wordsSequenceLength"
         />
+    <EditTextPreference
+        android:key="@string/preferenceKey_dictionary"
+        android:title="@string/preferenceTitle_dictionary"
+        android:defaultValue="@string/preferenceDefault_dictionary"
+        />
 </PreferenceScreen>
