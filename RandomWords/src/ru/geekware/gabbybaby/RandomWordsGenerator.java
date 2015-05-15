@@ -30,12 +30,12 @@ public class RandomWordsGenerator {
 
         if ( length < 1 || length > _dictionary.length ) {
             throw new IllegalArgumentException(
-                    "Parameter length must be in [1; dictionary.length]" );
+                "Parameter length must be in [1; dictionary.length]" );
         }
 
         Random random = new Random();
         ArrayList<String> source =
-                new ArrayList<String>( Arrays.asList( _dictionary ) );
+            new ArrayList<String>( Arrays.asList( _dictionary ) );
         String[] sequence = new String[ length ];
 
         for ( int index = 0; index < length; index++ ) {

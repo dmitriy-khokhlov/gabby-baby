@@ -34,7 +34,7 @@ public class RandomWordsActivity extends Activity {
 
         _wordGenerator = new RandomWordsGenerator( Settings.defaultWords );
         _wordsDemonstrator = new WordsDemonstrator( GenerateWordsSequence(),
-                (TextView) findViewById( R.id.wordTextView ) );
+            (TextView) findViewById( R.id.wordTextView ) );
     }
 
     @Override
@@ -57,9 +57,9 @@ public class RandomWordsActivity extends Activity {
 
     @Override
     protected void onActivityResult(
-            int requestCode, int resultCode, Intent data ) {
+        int requestCode, int resultCode, Intent data ) {
         ( (TextView) findViewById( R.id.wordTextView ) ).setText(
-                "display = " + Settings.wordDisplayTimeMillis + "; pause = "
-                        + Settings.pauseBetweenWordsMillis );
+            "display = " + Settings.wordDisplayTimeMillis + "; pause = "
+                + Settings.pauseBetweenWordsMillis );
     }
 }
