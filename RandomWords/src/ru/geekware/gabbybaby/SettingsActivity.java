@@ -28,20 +28,25 @@ public class SettingsActivity extends Activity
                         null );
     }
 
+    private int getIntPreference( int preferenceKeyResourceId ) {
+        return Integer
+                .parseInt( getStringPreference( preferenceKeyResourceId ) );
+    }
+
     private void refreshSettings() {
-        SharedPreferences preferences =
-                PreferenceManager.getDefaultSharedPreferences( this );
         try {
-            Settings.wordDisplayTimeMillis = Integer.parseInt(
-                    getStringPreference(
-                            R.string.preferenceKey_wordDisplayTimeMillis ) );
+            Settings.wordDisplayTimeMillis = getIntPreference(
+                    R.string.preferenceKey_wordDisplayTimeMillis );
         } catch ( NumberFormatException exception ) {
+                // Обработка исключения не нужна, т.к. значение поля в Settings не
+                // изменится - это и есть желаемое поведение.
         }
         try {
-            Settings.pauseBetweenWordsMillis = Integer.parseInt(
-                    getStringPreference(
-                            R.string.preferenceKey_pauseBetweenWordsMillis ) );
+            Settings.pauseBetweenWordsMillis = getIntPreference(
+                    R.string.preferenceKey_pauseBetweenWordsMillis );
         } catch ( NumberFormatException exception ) {
+                // Обработка исключения не нужна, т.к. значение поля в Settings не
+                // изменится - это и есть желаемое поведение.
         }
     }
 
