@@ -12,4 +12,10 @@
         android:numeric="integer"
         android:defaultValue="@integer/preferenceDefault_pauseBetweenWordsMillis"
         />
+    <EditTextPreference
+        android:key="@string/preferenceKey_wordsSequenceLength"
+        android:title="@string/preferenceTitle_wordsSequenceLength"
+        android:numeric="integer"
+        android:defaultValue="@integer/preferenceDefault_wordsSequenceLength"
+        />
 </PreferenceScreen>

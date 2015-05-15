@@ -9,26 +9,14 @@ import android.preference.PreferenceManager;
 public class SettingsActivity extends Activity
     implements OnSharedPreferenceChangeListener {
 
-    private static final String WORD_DISPLAY_TIME_MILLIS_KEY =
-        "wordDisplayTimeMillis";
-
-    private static final String PAUSE_BETWEEN_WORDS_MILLIS_KEY =
-        "pauseBetweenWordsMillis";
-
-    private void loadSettingsDefaults() {
-        Settings.wordDisplayTimeMillis = getResources()
-            .getInteger( R.integer.preferenceDefault_wordDisplayTimeMillis );
-        Settings.pauseBetweenWordsMillis = getResources()
-            .getInteger( R.integer.preferenceDefault_pauseBetweenWordsMillis );
-    }
-
     private String getStringPreference( int preferenceKeyResourceId ) {
         return PreferenceManager.getDefaultSharedPreferences( this )
             .getString( getResources().getString( preferenceKeyResourceId ),
                 null );
     }
 
-    private int getIntPreference( int preferenceKeyResourceId ) {
+    private int getIntPreference( int preferenceKeyResourceId )
+        throws NumberFormatException {
         return Integer
             .parseInt( getStringPreference( preferenceKeyResourceId ) );
     }
@@ -48,6 +36,13 @@ public class SettingsActivity extends Activity
             // Обработка исключения не нужна, т.к. значение поля в Settings не
             // изменится - это и есть желаемое поведение.
         }
+        try {
+            Settings.wordsSequenceLength =
+                getIntPreference( R.string.preferenceKey_wordsSequenceLength );
+        } catch ( NumberFormatException exception ) {
+            // Обработка исключения не нужна, т.к. значение поля в Settings не
+            // изменится - это и есть желаемое поведение.
+        }
     }
 
     @Override
@@ -56,7 +51,6 @@ public class SettingsActivity extends Activity
         PreferenceManager.setDefaultValues( this, R.xml.preferences, false );
         getFragmentManager().beginTransaction()
             .replace( android.R.id.content, new SettingsFragment() ).commit();
-        loadSettingsDefaults();
         refreshSettings();
     }
 
@@ -76,7 +70,8 @@ public class SettingsActivity extends Activity
 
     @Override
     public void onSharedPreferenceChanged(
-        SharedPreferences sharedPreferences, String key ) {
+        SharedPreferences sharedPreferences, String key
+    ) {
         refreshSettings();
     }
 }

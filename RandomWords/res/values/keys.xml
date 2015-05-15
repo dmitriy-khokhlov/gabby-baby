@@ -2,4 +2,5 @@
 <resources>
     <string name="preferenceKey_wordDisplayTimeMillis">wordDisplayTimeMillis</string>
     <string name="preferenceKey_pauseBetweenWordsMillis">pauseBetweenWordsMillis</string>
+    <string name="preferenceKey_wordsSequenceLength">wordsSequenceLength</string>
 </resources>

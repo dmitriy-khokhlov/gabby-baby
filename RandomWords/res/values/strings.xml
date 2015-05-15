@@ -4,4 +4,5 @@
     <string name="settingsActivityLabel">Настройки</string>
     <string name="preferenceTitle_wordDisplayTimeMillis">Время отображения слова (мс)</string>
     <string name="preferenceTitle_pauseBetweenWordsMillis">Пауза между словами (мс)</string>
+    <string name="preferenceTitle_wordsSequenceLength">Количество слов</string>
 </resources>

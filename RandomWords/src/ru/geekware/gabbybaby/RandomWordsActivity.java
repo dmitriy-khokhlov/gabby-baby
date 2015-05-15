@@ -27,11 +27,9 @@ public class RandomWordsActivity extends Activity {
 
     @Override
     public void onCreate( Bundle savedInstanceState ) {
-
         super.onCreate( savedInstanceState );
-
         setContentView( R.layout.main );
-
+        Settings.loadDefaults( this );
         _wordGenerator = new RandomWordsGenerator( Settings.defaultWords );
         _wordsDemonstrator = new WordsDemonstrator( GenerateWordsSequence(),
             (TextView) findViewById( R.id.wordTextView ) );
@@ -45,8 +43,8 @@ public class RandomWordsActivity extends Activity {
 
     private String[] GenerateWordsSequence() {
         int length = Settings.defaultWords.length;
-        if ( length > Settings.maxWordsSequenceLength ) {
-            length = Settings.maxWordsSequenceLength;
+        if ( length > Settings.wordsSequenceLength ) {
+            length = Settings.wordsSequenceLength;
         }
         return _wordGenerator.GenerateWordsSequence( length );
     }
@@ -57,7 +55,8 @@ public class RandomWordsActivity extends Activity {
 
     @Override
     protected void onActivityResult(
-        int requestCode, int resultCode, Intent data ) {
+        int requestCode, int resultCode, Intent data
+    ) {
         ( (TextView) findViewById( R.id.wordTextView ) ).setText(
             "display = " + Settings.wordDisplayTimeMillis + "; pause = "
                 + Settings.pauseBetweenWordsMillis );

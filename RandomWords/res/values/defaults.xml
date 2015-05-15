@@ -2,4 +2,5 @@
 <resources>
     <integer name="preferenceDefault_wordDisplayTimeMillis">1500</integer>
     <integer name="preferenceDefault_pauseBetweenWordsMillis">300</integer>
+    <integer name="preferenceDefault_wordsSequenceLength">5</integer>
 </resources>
