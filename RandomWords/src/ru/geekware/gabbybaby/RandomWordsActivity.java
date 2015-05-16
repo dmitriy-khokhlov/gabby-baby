@@ -6,8 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-// todo: вынести все в ресурсы и настройки
-// todo: перезапуск показа после выхода из настроек
 // todo: старт показа по правильному событию
 // todo: старт и рестарт по действию пользователя
 // todo: анимация смены слов
@@ -16,11 +14,13 @@ import android.widget.TextView;
 // todo: полный экран
 // todo: логотип
 // todo: только горизонтальная ориентация
+// todo: проверка и предупреждения при изменении настроек
 // todo: название с пробелом или без?
 // todo: Play Market?
 // todo: интернационализация?
 public class RandomWordsActivity extends Activity {
 
+    private Settings _settings;
     private RandomWordsGenerator _wordGenerator;
     private TextView _wordTextView;
     private WordsDemonstrator _wordsDemonstrator;
@@ -28,37 +28,46 @@ public class RandomWordsActivity extends Activity {
     @Override
     public void onCreate( Bundle savedInstanceState ) {
         super.onCreate( savedInstanceState );
+        Settings.provideContext( this );
+        _settings = Settings.getInstance();
         setContentView( R.layout.main );
-        Settings.loadDefaults( this.getResources() );
-        _wordGenerator = new RandomWordsGenerator( Settings.dictionary );
-        _wordsDemonstrator = new WordsDemonstrator( GenerateWordsSequence(),
-            (TextView) findViewById( R.id.wordTextView ) );
+        _wordTextView = (TextView) findViewById( R.id.wordTextView );
+        _wordGenerator = new RandomWordsGenerator();
+        _wordsDemonstrator = new WordsDemonstrator( _wordTextView );
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        _wordsDemonstrator.startDemonstration();
-    }
-
-    private String[] GenerateWordsSequence() {
-        int length = Settings.dictionary.length;
-        if ( length > Settings.wordsSequenceLength ) {
-            length = Settings.wordsSequenceLength;
-        }
-        return _wordGenerator.GenerateWordsSequence( length );
+        startWordsDemonstration();
     }
 
     public void onSettingsButtonClick( View v ) {
-        startActivity( new Intent( this, SettingsActivity.class ) );
+        stopWordsDemonstration();
+        startActivityForResult( new Intent( this, SettingsActivity.class ), 0 );
     }
 
     @Override
     protected void onActivityResult(
         int requestCode, int resultCode, Intent data
     ) {
-        ( (TextView) findViewById( R.id.wordTextView ) ).setText(
-            "display = " + Settings.wordDisplayTimeMillis + "; pause = "
-                + Settings.pauseBetweenWordsMillis );
+        _settings.refresh();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        stopWordsDemonstration();
+    }
+
+    private void startWordsDemonstration() {
+        //stopWordsDemonstration();
+        _wordsDemonstrator.setWords( _wordGenerator.GenerateWordsSequence() );
+        _wordsDemonstrator.start();
+    }
+
+    private void stopWordsDemonstration() {
+        _wordsDemonstrator.stop();
+        _wordsDemonstrator.reset();
     }
 }

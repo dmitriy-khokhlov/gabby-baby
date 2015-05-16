@@ -10,33 +10,68 @@ public class WordsDemonstrator {
 
     private String[] _words;
     private int _nextIndex;
+    private boolean _isStopped = true;
+
+    private Settings _settings;
     private TextView _textView;
     private Handler _handler;
     private DisplayWordRunnable _displayWordRunnable;
     private ClearWordRunnable _clearWordRunnable;
 
-    public WordsDemonstrator( String[] words, TextView viewer ) {
-        _words = words;
-        _nextIndex = 0;
+    public WordsDemonstrator( TextView viewer ) {
+        _settings = Settings.getInstance();
         _textView = viewer;
         _handler = new Handler();
         _displayWordRunnable = new DisplayWordRunnable();
         _clearWordRunnable = new ClearWordRunnable();
+        reset();
     }
 
-    public void startDemonstration() {
-        _displayWordRunnable.run();
+    public String[] getWords() {
+        return _words;
+    }
+
+    public void setWords( String[] words ) {
+        if ( !_isStopped ) {
+            throw new SetWordsWhileDemonstrating();
+        }
+        _words = words;
+    }
+
+    public void start() {
+        if ( _isStopped ) {
+            _isStopped = false;
+            _displayWordRunnable.run();
+        }
+    }
+
+    public void stop() {
+        _isStopped = true;
+        _handler.removeCallbacks( _displayWordRunnable );
+        _handler.removeCallbacks( _clearWordRunnable );
+        _handler.post( _clearWordRunnable );
+    }
+
+    public void reset() {
+        _nextIndex = 0;
+    }
+
+    private void checkCompletion() {
+        if ( _nextIndex < 0 || _nextIndex >= _words.length ) {
+            _isStopped = true;
+        }
     }
 
     private class DisplayWordRunnable implements Runnable {
 
         @Override
         public void run() {
-            if ( _nextIndex < _words.length ) {
+            checkCompletion();
+            if ( !_isStopped ) {
                 _textView.setText( _words[ _nextIndex ] );
                 _nextIndex++;
                 _handler.postDelayed( _clearWordRunnable,
-                    Settings.wordDisplayTimeMillis );
+                    _settings.getWordDisplayTimeMillis() );
             }
         }
     }
@@ -46,10 +81,19 @@ public class WordsDemonstrator {
         @Override
         public void run() {
             _textView.setText( "" );
-            if ( _nextIndex < _words.length ) {
+            checkCompletion();
+            if ( !_isStopped ) {
                 _handler.postDelayed( _displayWordRunnable,
-                    Settings.pauseBetweenWordsMillis );
+                    _settings.getPauseBetweenWordsMillis() );
             }
+        }
+    }
+
+    public class SetWordsWhileDemonstrating extends RuntimeException {
+
+        public SetWordsWhileDemonstrating() {
+            super( "Can't change words while demonstrating them, call stop() "
+                + "first" );
         }
     }
 }

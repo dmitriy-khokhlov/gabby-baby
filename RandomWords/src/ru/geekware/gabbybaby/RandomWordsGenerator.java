@@ -9,38 +9,50 @@ import java.util.Random;
  */
 public class RandomWordsGenerator {
 
-    private String[] _dictionary;
+    private Settings _settings;
 
-    public RandomWordsGenerator( String[] dictionary ) {
-        _dictionary = dictionary;
+    public RandomWordsGenerator() {
+        _settings = Settings.getInstance();
     }
 
     /**
-     * Генерирует случайную последовательность слов заданной длины без
-     * повторений.
+     * Генерирует случайную последовательность слов заданной длины с
+     * минимальными повторениями.
      *
-     * @param length длина генерируемой последовательности
      * @return сгенерированная последовательность
-     * @throws java.lang.IllegalArgumentException если длина последовательности
-     * меньше 1 или больше длины словаря
      */
-    // todo: сделать не "без повторений", а с "минимальными повторениями",
-    // чтобы можно было генерировать последовательности неограниченного размера.
-    public String[] GenerateWordsSequence( int length ) {
+    public String[] GenerateWordsSequence() {
 
-        if ( length < 1 || length > _dictionary.length ) {
-            throw new IllegalArgumentException(
-                "Parameter length must be in [1; dictionary.length]" );
-        }
+        int sequenceLength = _settings.getWordsSequenceLength();
+        String[] dictionary = _settings.getDictionary();
 
         Random random = new Random();
-        ArrayList<String> source =
-            new ArrayList<String>( Arrays.asList( _dictionary ) );
-        String[] sequence = new String[ length ];
+        ArrayList<String> source = new ArrayList<String>();
+        String[] sequence = new String[ sequenceLength ];
 
-        for ( int index = 0; index < length; index++ ) {
-            int randomIndex = random.nextInt( length - index );
-            sequence[ index ] = source.remove( randomIndex );
+        String lastWord = null;
+        for ( int sequenceIndex = 0; sequenceIndex < sequenceLength;
+            sequenceIndex++
+            ) {
+
+            if ( source.isEmpty() ) {
+                source.addAll( Arrays.asList( dictionary ) );
+                if ( sequenceIndex > 0 ) {
+                    // Если использовали все слова из словаря и нужно
+                    // генерировать еще, запомнить последнее слово, чтобы
+                    // избежать повторения двух одинаковых слов подряд.
+                    lastWord = sequence[ sequenceIndex - 1 ];
+                }
+            }
+
+            int sourceIndex;
+            do {
+                sourceIndex = random.nextInt( source.size() );
+            } while ( lastWord != null && source.get( sourceIndex )
+                .equals( lastWord ) );
+            lastWord = null;
+
+            sequence[ sequenceIndex ] = source.remove( sourceIndex );
         }
 
         return sequence;
