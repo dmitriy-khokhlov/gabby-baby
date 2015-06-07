@@ -2,9 +2,11 @@
 <resources>
     <string name="applicationName">GabbyBaby</string>
     <string name="settingsActivityLabel">Настройки</string>
-    <string name="preferenceTitle_wordDisplayTimeMillis">Время отображения слова (мс)</string>
-    <string name="preferenceTitle_pauseBetweenWordsMillis">Пауза между словами (мс)</string>
+    <string name="preferenceTitle_wordDisplayTimeMillis">Время отображения слова</string>
+    <string name="preferenceTitle_pauseBetweenWordsMillis">Пауза между словами</string>
     <string name="preferenceTitle_wordsSequenceLength">Количество слов</string>
     <string name="preferenceTitle_dictionary">Словарь</string>
+    <string name="numberOfMilliseconds">%s миллисекунд</string>
     <string name="dictionarySeparatorRegexp">[,\\s]+</string>
+    <string name="dictionarySeparator">", "</string>
 </resources>

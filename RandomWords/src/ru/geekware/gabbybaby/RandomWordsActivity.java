@@ -6,7 +6,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-// todo: текст с описанием каждой настройки (или с текущим значением)
 // todo: расположить кнопку настроек точно в углу
 // todo: старт показа по правильному событию
 // todo: старт и рестарт по действию пользователя
