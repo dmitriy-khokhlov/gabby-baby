@@ -7,8 +7,6 @@ import android.preference.PreferenceManager;
 
 public class Settings {
 
-    public static final String DICTIONARY_SEPARATOR_REGEXP = "[,\\s]+";
-
     private static Resources _resources;
     private static SharedPreferences _preferences;
     private static Settings _instance;
@@ -75,7 +73,8 @@ public class Settings {
 
     public void setDictionary( String rawDictionary ) {
         if ( rawDictionary != null ) {
-            setDictionary( rawDictionary.split( DICTIONARY_SEPARATOR_REGEXP ) );
+            setDictionary( rawDictionary.split(
+                _resources.getString( R.string.dictionarySeparatorRegexp ) ) );
         }
     }
 

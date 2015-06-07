@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+// todo: текст с описанием каждой настройки (или с текущим значением)
+// todo: расположить кнопку настроек точно в углу
 // todo: старт показа по правильному событию
 // todo: старт и рестарт по действию пользователя
 // todo: анимация смены слов
@@ -61,7 +63,6 @@ public class RandomWordsActivity extends Activity {
     }
 
     private void startWordsDemonstration() {
-        //stopWordsDemonstration();
         _wordsDemonstrator.setWords( _wordGenerator.GenerateWordsSequence() );
         _wordsDemonstrator.start();
     }
