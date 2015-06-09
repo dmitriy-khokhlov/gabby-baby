@@ -57,7 +57,8 @@ public class WordsDemonstrator {
     }
 
     private void checkCompletion() {
-        if ( _nextIndex < 0 || _nextIndex >= _words.length ) {
+        if ( !_isStopped
+            && ( _nextIndex < 0 || _nextIndex >= _words.length ) ) {
             _isStopped = true;
         }
     }
