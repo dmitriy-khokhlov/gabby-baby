@@ -29,6 +29,10 @@ public class Settings {
         return _instance;
     }
 
+    public static Resources getResources() {
+        return _resources;
+    }
+
     private int _wordDisplayTimeMillis;
     private int _pauseBetweenWordsMillis;
     private int _wordsSequenceLength;
@@ -74,7 +78,8 @@ public class Settings {
     public void setDictionary( String rawDictionary ) {
         if ( rawDictionary != null ) {
             setDictionary( rawDictionary.split(
-                _resources.getString( R.string.dictionarySeparatorRegexp ) ) );
+                _resources
+                    .getString( R.string.wordsParsingSeparatorRegexp ) ) );
         }
     }
 

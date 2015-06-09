@@ -1,11 +1,9 @@
 package ru.geekware.gabbybaby;
 
 import android.os.Handler;
+import android.text.Html;
 import android.widget.TextView;
 
-/**
- * Задача показа слов по таймеру.
- */
 public class WordsDemonstrator {
 
     private String[] _words;
@@ -69,7 +67,7 @@ public class WordsDemonstrator {
         public void run() {
             checkCompletion();
             if ( !_isStopped ) {
-                _textView.setText( _words[ _nextIndex ] );
+                _textView.setText( Html.fromHtml( _words[ _nextIndex ] ) );
                 _nextIndex++;
                 _handler.postDelayed( _clearWordRunnable,
                     _settings.getWordDisplayTimeMillis() );

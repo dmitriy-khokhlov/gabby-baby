@@ -7,12 +7,9 @@ import java.util.Random;
 /**
  * Генератор случайной последовательности слов.
  */
-public class RandomWordsGenerator {
+public final class RandomWordsGenerator {
 
-    private Settings _settings;
-
-    public RandomWordsGenerator() {
-        _settings = Settings.getInstance();
+    private RandomWordsGenerator() {
     }
 
     /**
@@ -21,8 +18,9 @@ public class RandomWordsGenerator {
      *
      * @return сгенерированная последовательность
      */
-    public String[] GenerateWordsSequence() {
+    public static String[] GenerateWordsSequence() {
 
+        final Settings _settings = Settings.getInstance();
         int sequenceLength = _settings.getWordsSequenceLength();
         String[] dictionary = _settings.getDictionary();
 

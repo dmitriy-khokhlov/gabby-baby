@@ -7,6 +7,12 @@
     <string name="preferenceTitle_wordsSequenceLength">Количество слов</string>
     <string name="preferenceTitle_dictionary">Словарь</string>
     <string name="numberOfMilliseconds">%s миллисекунд</string>
-    <string name="dictionarySeparatorRegexp">[,\\s]+</string>
-    <string name="dictionarySeparator">", "</string>
+    <string name="wordsParsingSeparatorRegexp">[,\\s]+</string>
+    <string name="wordsDisplaySeparator">", "</string>
+    <string name="syllableParsingSeparatorRegexp">\\.+</string>
+    <string name="colorTextHtml">&lt;font color=\"%2$s\"&gt;%1$s&lt;/font&gt;</string>
+    <string-array name="syllablesColors">
+        <item>#00734d</item>
+        <item>#12b33a</item>
+    </string-array>
 </resources>

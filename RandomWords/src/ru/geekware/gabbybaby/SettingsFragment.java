@@ -119,7 +119,7 @@ public class SettingsFragment extends PreferenceFragment
         _settings.setDictionary(
             sharedPreferences.getString( _dictionaryKey, null ) );
         final String summary = TextUtils
-            .join( getResources().getString( R.string.dictionarySeparator ),
+            .join( getResources().getString( R.string.wordsDisplaySeparator ),
                 _settings.getDictionary() );
         findPreference( _dictionaryKey )
             .setSummary( summary );

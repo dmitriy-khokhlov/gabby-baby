@@ -26,9 +26,12 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/wordTextView"
-        android:textColor="#fd004f23"
         android:textSize="350sp"
         android:typeface="sans"
+        android:editable="false"
+        android:lines="1"
+        android:singleLine="false"
+        android:textStyle="bold"
         />
 
 </LinearLayout>

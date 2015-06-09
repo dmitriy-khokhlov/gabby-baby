@@ -6,23 +6,25 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
-// todo: расположить кнопку настроек точно в углу
+// todo: разный цвет слогов
+// todo: полный экран
+// todo: только горизонтальная ориентация
+// todo: логотип
+// todo: динамический размер текста
 // todo: старт показа по правильному событию
 // todo: старт и рестарт по действию пользователя
-// todo: анимация смены слов
-// todo: разный цвет слогов
-// todo: динамический размер текста
-// todo: полный экран
-// todo: логотип
-// todo: только горизонтальная ориентация
-// todo: проверка и предупреждения при изменении настроек
+// todo: расположить кнопку настроек точно в углу
+// todo: пояснения в диалогах редактирования настроек
+// todo: кнопки инкремента и декремента для числовых настроек
+// todo: проверки и предупреждения при изменении настроек
+// todo: использовать quantity strings, где нужно
+// todo: анимация смены слов?
 // todo: название с пробелом или без?
 // todo: Play Market?
 // todo: интернационализация?
 public class RandomWordsActivity extends Activity {
 
     private Settings _settings;
-    private RandomWordsGenerator _wordGenerator;
     private TextView _wordTextView;
     private WordsDemonstrator _wordsDemonstrator;
 
@@ -33,7 +35,6 @@ public class RandomWordsActivity extends Activity {
         _settings = Settings.getInstance();
         setContentView( R.layout.main );
         _wordTextView = (TextView) findViewById( R.id.wordTextView );
-        _wordGenerator = new RandomWordsGenerator();
         _wordsDemonstrator = new WordsDemonstrator( _wordTextView );
     }
 
@@ -41,6 +42,12 @@ public class RandomWordsActivity extends Activity {
     protected void onStart() {
         super.onStart();
         startWordsDemonstration();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        stopWordsDemonstration();
     }
 
     public void onSettingsButtonClick( View v ) {
@@ -62,7 +69,8 @@ public class RandomWordsActivity extends Activity {
     }
 
     private void startWordsDemonstration() {
-        _wordsDemonstrator.setWords( _wordGenerator.GenerateWordsSequence() );
+        _wordsDemonstrator.setWords( WordsColorizer.Colorize(
+            RandomWordsGenerator.GenerateWordsSequence() ) );
         _wordsDemonstrator.start();
     }
 
